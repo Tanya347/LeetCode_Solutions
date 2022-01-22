@@ -1,31 +1,27 @@
 class Solution {
 public:
     int jump(vector<int>& nums) {
-        
         int n = nums.size();
-        vector<int> dp(n, 0);
+        //if there is only one element there are 0 jumps we can make
+        if(n == 1)
+            return 0;
+        
+        //stores the max jump that can take place
+        int maxJump = 0;
+        
+        //stores the place that we have to reach
+        int reach = nums[0];
+        
+        //stores the number of jumps
+        int jumps = 1;
         
         for(int i = 0; i < n - 1; i++) {
-            
-            int j = nums[i];
-            
-            while(j >= 1) {
-                
-                if(i + j < n && !dp[i + j])
-                    dp[i + j] = dp[i] + 1;
-                
-                if(dp[n - 1])
-                    break;
-                
-                j--;
-                
+            maxJump = max(maxJump, nums[i] + i);
+            if(i == reach) {
+                jumps++;
+                reach = maxJump;
             }
-            
-            if(dp[n - 1])
-                break;
-            
         }
-        
-        return dp[n - 1];
+        return jumps;
     }
 };
