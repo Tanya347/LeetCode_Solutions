@@ -1,49 +1,29 @@
 class Solution {
 public:
     bool detectCapitalUse(string word) {
-        bool check;
+        bool check1 = false, check2 = false, check3 = false;
         
-        //case 1 when all should be capital
-        for(int i = 0; i < word.size(); i++) {
-            if(65 <= word[i] && word [i] <= 90) {
-                check = true;
-            }
-            else {
-                check = false;
-                break;
-            }
+        if(65 <= word[0] && word[0] <= 90) {
+            check1 = check2 = true;
         }
         
-        if(check)
-            return check;
+        if(97 <= word[0] && word[0] <= 122)
+            check2 = true;
         
-        //case 2 when all should be lowercase
-        for(int i = 0; i < word.size(); i++) {
-            if(97 <= word[i] && word[i] <= 122) {
-                check = true;
-            }
-            else {
-                check = false;
-                break;
-            }
+        for(int i = 1; i < word.length(); i++) {
+            
+            if(!(65 <= word[i] && word[i] <= 90) && check1)
+                check1 = false;
+            
+            if(!(97 <= word[i] && word[i] <= 122) && check2)
+                check2 = false;
+            
+            if(!(97 <= word[i] && word[i] <= 122) && check3)
+                check3 = false;
         }
         
-        if(check)
-            return check;
-        
-        //case 3
-        if(65 <= word[0] && word[0] <= 90)
-            check = true;
-        for(int i = 1; i < word.size(); i++) {
-            if(97 <= word[i] && word[i] <= 122) {
-                check = true;
-            }
-            else {
-                check = false;
-                break;
-            }
-        }
-        
-        return check;
+        if(check1 || check2 || check3)
+            return true;
+        else return false;
     }
 };
