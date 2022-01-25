@@ -2,28 +2,18 @@ class Solution {
 public:
     bool validMountainArray(vector<int>& arr) {
         
-        if(arr.size() <= 1)
+        int N = arr.size();
+        int i = 0;
+        
+        while(i + 1 < N && arr[i] < arr[i + 1])
+            i++;
+        
+        if(i == 0 || i == N - 1)
             return false;
         
-        bool foundMax = false, isInc = false;
+        while(i + 1 < N && arr[i] > arr[i + 1])
+            i++;
         
-        for(int i = 0; i < arr.size() - 1; i++) {
-            if(arr[i] < arr[i + 1] && !foundMax) {
-                isInc = true;
-                continue;
-            }
-            
-            else if(arr[i] > arr[i + 1] && !foundMax && isInc)
-                foundMax = true;
-            
-            else if(arr[i] > arr[i + 1] && foundMax)
-                continue;
-            
-            else {
-                return false;
-                break;
-            }
-        }
-        return foundMax;
+        return i == N - 1;
     }
 };
