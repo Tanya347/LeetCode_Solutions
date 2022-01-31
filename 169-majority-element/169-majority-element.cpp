@@ -2,20 +2,12 @@ class Solution {
 public:
     int majorityElement(vector<int>& nums) {
         
-        int n = floor(nums.size() / 2);
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
         
-        unordered_map<int, int> mp;
-        
-        int count = 0, maxElement = nums[0];
-        
-        for(int i = 0; i < nums.size(); i++) {
-            if(mp.find(nums[i]) != mp.end() && mp[nums[i]] > count) {
-                    count = mp[nums[i]];
-                    maxElement = nums[i];
-            }
-            mp[nums[i]]++;
-        }
-        
-        return maxElement;
+        //As we know that the majority element is present in more than n/2 times
+        //it is guaranteed that whenever we sort the array the middle element will be 
+        //the majority element
+        return nums[n/2];
     }
 };
