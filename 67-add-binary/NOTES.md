@@ -1,1 +1,1 @@
-​
+​We can use modulo operators to find the carry, in case of binary too. So don't waste your time matching everthing. And the integer value of characters in strings can be found out by subtracting '0', also to make an integer back to a string we can add '0'.
