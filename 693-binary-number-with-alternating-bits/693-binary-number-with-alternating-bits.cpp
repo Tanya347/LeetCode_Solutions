@@ -1,20 +1,20 @@
 class Solution {
 public:
     bool hasAlternatingBits(int n) {
-        int binary = n % 2;
-        n = n/2;
         
+        int binary = n & 1; 
+        n = n >> 1;
         bool isAlternate = true;
         
-        while(isAlternate && n > 0) {
-            if(n % 2 != binary) {
-                binary = n % 2;
-                n = n/2;
+        while(n != 0) {
+            if(binary != (n & 1)) {
+                binary = n & 1;
+                n = n >> 1;
             }
-            
             else
                 return false;
         }
+        
         return isAlternate;
     }
 };
