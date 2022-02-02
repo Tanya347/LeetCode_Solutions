@@ -3,12 +3,14 @@ public:
     int hammingDistance(int x, int y) {
         
         //better approach, credits to the rightful coder haha
+        //using Brian Kerninghan's Algorithm
+        //refer to notes for explanation
         
         x = x ^ y;
         y = 0;
         
         while(x != 0) {
-            x = x & x - 1;
+            x = x & (x - 1);
             y++;
         }
         
