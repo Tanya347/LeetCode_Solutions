@@ -2,7 +2,7 @@ class Solution {
 public:
     bool lemonadeChange(vector<int>& bills) {
     
-        int Count5 = 0, Count10 = 0, Count20 = 0; 
+        int Count5 = 0, Count10 = 0; 
         
         for(int i = 0; i < bills.size(); i++) {
         
@@ -30,8 +30,6 @@ public:
                     Count5 -= 3;
                 
                 else return false;
-                
-                Count20++;
             }
         }
     
