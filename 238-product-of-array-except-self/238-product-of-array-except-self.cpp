@@ -3,31 +3,37 @@ public:
     vector<int> productExceptSelf(vector<int>& nums) {
         
         
-        //Division method even though question says without division cause
-        //this is what is coming to my mind
+        //Credits to thegrade haha
+        //So in this approach we are going to store the product of elements towards right 
+        //in one traversal
+        //Then we'll traverse again and maintain a prod variable that stores the product
+        //of elements towards left
         
+        int n = nums.size();
+        vector<int> ans(n);
+        
+        //finding prod of elements towards right and storing them in ans
+        ans[n - 1] = nums[n - 1];
+        
+        for(int i = n - 2; i >= 0; i--) {
+            ans[i] = ans[i + 1] * nums[i];
+        }
+        
+        //p will store the prod of elements towards left
         int prod = 1;
-        vector<int> ans(nums.size(), 0);
-        int zeroCount = 0;
         
-        for(int i = 0; i < nums.size(); i++) {
-            if(nums[i] == 0) {
-                zeroCount++;
-            }
-            if(nums[i] != 0)
-                prod *= nums[i];
-        }
-        
-        if(zeroCount >= 2) return ans;
-        
-        for(int i = 0; i < nums.size(); i++) {
-            if(nums[i] == 0)
+        for(int i = 0; i < n; i++) {
+            if(i == n - 1)
+                
                 ans[i] = prod;
-            else if(zeroCount == 1)
-                ans[i] = 0;
             else
-                ans[i] = prod / nums[i];
+                
+                //p has elements towards left and ans[i + 1] has elements towards right. voila!!
+                ans[i] = ans[i + 1] * prod;
+            
+            prod = nums[i] * prod;
         }
+        
         return ans;
     }
 };
