@@ -1,5 +1,4 @@
-**DIVISON METHOD**
-* Counting the number of zeroes, along with finding the product of the whole array.
-* If zeroes are greater than 1, then just return a zero array.
-* If one zero is there then replace that zero with product of the whole array and the other places with zero.
-* If no zeroes are there just replace the element with the quotient that comes by dividing the product with itself.
+**PREFIX AND SUFFIX PRODUCT**
+* Travel once from behind to store the product of elements towards right, the ith element has the product of all elements towards right including itself.
+* Travel the array from start again, maintaining the product from the left and keep multiplying the products on the right (stored at i+1 th location) with prod.
+​
