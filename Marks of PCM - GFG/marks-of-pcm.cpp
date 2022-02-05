@@ -25,14 +25,12 @@ bool comparator(marks s1, marks s2) {
         return s1.p < s2.p;
         
     //if marks of phy are equal sort according to the greater chem marks    
-    if(s1.p == s2.p && s1.c != s2.c)
+    else if(s1.c != s2.c)
         return s1.c > s2.c;
     
     //if marks of chem and phy both equal sort according to lesser math marks
-    else if(s1.c == s2.c && s1.m != s2.m) 
+    else 
         return s1.m < s2.m;
-        
-   
         
 }
 
