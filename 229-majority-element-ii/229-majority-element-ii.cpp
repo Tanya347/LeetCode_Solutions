@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
         
-        //Sometimes I think how can I be so smart
+        //Self implemented :) 85% fast 
         
         //so we'll sort the vector and travel it and maintain a count
         sort(nums.begin(), nums.end());
