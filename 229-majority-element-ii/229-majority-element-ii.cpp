@@ -4,7 +4,7 @@ public:
         
         //Sometimes I think how can I be so smart
         
-        //so we'll sort the vector and travel the it and a count
+        //so we'll sort the vector and travel it and maintain a count
         sort(nums.begin(), nums.end());
         vector<int> ans;
         
