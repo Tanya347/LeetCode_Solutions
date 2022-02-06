@@ -5,30 +5,48 @@ public:
         if(nums.size() == 1)
             return nums;
         
-        if(nums.size() == 2) {
-            if(nums[0] == nums[1])
-                return {nums[0]};
-            else 
-                return nums;
+        int count1 = 0, count2 = 0, majority1 = 0, majority2 = 0;
+        
+        for(int i = 0; i < nums.size(); i++) {
+            if(nums[i] == majority1)
+                count1++;
+            
+            else if(nums[i] == majority2)
+                count2++;
+            
+            else if(count1 == 0) {
+                majority1 = nums[i];
+                count1 = 1;
+            }
+            
+            else if(count2 == 0) {
+                majority2 = nums[i];
+                count2 = 1;
+            }
+            
+            else {
+                count1--;
+                count2--;
+            }
+            
         }
         
-        sort(nums.begin(), nums.end());
+        count1 = 0, count2 = 0;
+        
+        for(int i = 0; i < nums.size(); i++) {
+            if(nums[i] == majority1)
+                count1++;
+            else if(nums[i] == majority2)
+                count2++;
+        }
+        
         vector<int> ans;
         
-        int n = nums.size() / 3, count = 1;
+        if(count1 > nums.size() / 3) 
+            ans.push_back(majority1);
         
-        for(int i = 1; i < nums.size(); i++) {
-            if(nums[i] == nums[i - 1])
-                count++;
-            else
-                count = 1;
-            
-            if(count > n) {
-                if(ans.empty() || (ans.size() > 0 && ans[ans.size() - 1] != nums[i]))
-                    ans.push_back(nums[i]);
-                count = 0;
-            }
-        }
+        if(count2 > nums.size() / 3) 
+            ans.push_back(majority2);
         
         return ans;
     }
