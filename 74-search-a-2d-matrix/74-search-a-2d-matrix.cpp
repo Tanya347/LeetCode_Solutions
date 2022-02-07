@@ -17,12 +17,25 @@ public:
     
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         
-        int n = matrix.size(), m = matrix[0].size();
+        // if(matrix.size() == 1 and matrix[0].size() == 1) {
+        //     return (matrix[0][0] == target)? true : false;
+        // }
         
-        for(int i = 0; i < n; i++) {
+        int m = matrix.size(), n = matrix[0].size(); 
+        int rs = 0, re = m - 1;
+        
+        while(rs <= re) {
+            int rmid = (rs + re)/2;
             
-            if(binary_search(matrix[i], 0, m - 1, target))
-                return true;
+            if(target >= matrix[rmid][0] && target <= matrix[rmid][n - 1]) {
+                return binary_search(matrix[rmid], 0, n - 1, target);
+            }
+            
+            else if(target < matrix[rmid][0])
+                re = rmid - 1;
+            
+            else 
+                rs = rmid + 1;
         }
         
         return false;
