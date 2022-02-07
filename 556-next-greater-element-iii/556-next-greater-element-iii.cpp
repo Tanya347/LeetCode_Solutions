@@ -3,11 +3,11 @@ public:
     int nextGreaterElement(int n) {
         
         //array to store all the digits
-        vector<int> number;
+        string number = "";
         
         //storing the digits
         while(n != 0) {
-            number.push_back(n % 10);
+            number += n % 10 + '0';
             n = n/10;
         }
         
@@ -47,7 +47,7 @@ public:
         long long int ans = 0;
         
         for(int k = 0; k < number.size(); k++) {
-            ans = ans*10 + number[k];
+            ans = ans*10 + (number[k] - '0');
         }
         
         //if it exceeds the limit of integers return -1
