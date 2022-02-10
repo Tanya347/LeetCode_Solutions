@@ -10,20 +10,31 @@ public:
     {
         // Code here.
         vector<int> ans;
-        sort(nums.begin(), nums.end());
         
+        int Xor = 0;
         for(int i = 0; i < nums.size(); i++) {
-            
-            if(i == 0 && nums[i] != nums[i + 1])
-                ans.push_back(nums[i]);
-                
-            else if(i == nums.size() - 1 && nums[i] != nums[i - 1])
-                ans.push_back(nums[i]);
-                
-            else if(nums[i] != nums[i - 1] && nums[i] != nums[i + 1])
-                ans.push_back(nums[i]);
+            Xor ^= nums[i];
         }
         
+        int i = 0;
+        for(i = 0; i < 32; i++) {
+            if(1 << i & Xor) 
+                break;
+        }
+        
+        int offbits = 0, onbits = 0;
+        
+        for(int j = 0; j < nums.size(); j++) {
+            if(1 << i & nums[j])
+                onbits ^= nums[j];
+            else
+                offbits ^= nums[j];
+        }
+        
+        ans.push_back(onbits);
+        ans.push_back(offbits);
+        
+        sort(ans.begin(), ans.end());
         return ans;
     }
 };
