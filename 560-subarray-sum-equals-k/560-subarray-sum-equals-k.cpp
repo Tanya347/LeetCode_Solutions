@@ -4,18 +4,25 @@ public:
         
         int count = 0, s = 0;
         
+        //map to store the cumulative sum of arr so far
         unordered_map<int, int> sum;
         
+        //adding an element 0 for the case when the subarray from the starting index itself gives
+        //desired sum
         sum[0] = 1;
         
         for(int i = 0; i < nums.size(); i++) {
             
+            //cumulative sum till now
             s += nums[i];
             
+            //finding out if there was a subarray with sum s - k
+            //so that there exists a subarray after that subarray whose sum is k
             if(sum.find(s - k) != sum.end()) {
                 count += sum[s - k];
             }
             
+            //increment count of every unique sum found
             sum[s]++;
         }
         
