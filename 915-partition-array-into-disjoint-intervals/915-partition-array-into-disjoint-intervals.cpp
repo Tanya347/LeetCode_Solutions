@@ -12,9 +12,9 @@ public:
         for(int i = n - 2; i >= 0; i--)
             rMin[i] = min(rMin[i + 1], arr[i]);
         
-        for(int i = 1; i < n; i++) {
-            if(lMax[i - 1] <= rMin[i])
-                return i;
+        for(int i = 0; i < n - 1; i++) {
+            if(lMax[i] <= rMin[i + 1])
+                return i + 1;
         }
         
         return -1;
