@@ -3,20 +3,18 @@ public:
     int partitionDisjoint(vector<int>& arr) {
         
         int n = arr.size();
-        vector<int> lMax(n, arr[0]);
-        vector<int> rMin(n, arr[n - 1]);
+        vector<int> minRight(n,arr[n - 1]);
         
-        for(int i = 1; i < n; i++)
-            lMax[i] = max(lMax[i - 1], arr[i]);
-        
-        for(int i = n - 2; i >= 0; i--)
-            rMin[i] = min(rMin[i + 1], arr[i]);
-        
-        for(int i = 0; i < n - 1; i++) {
-            if(lMax[i] <= rMin[i + 1])
-                return i + 1;
+        for(int i = n - 2; i >= 0; i--) {
+            minRight[i] = min(minRight[i + 1], arr[i]);
         }
         
+        int maxLeft = arr[0];
+        for(int i = 1; i < n; i++) {
+            maxLeft = max(maxLeft, arr[i - 1]);
+            if(maxLeft <= minRight[i])
+                return i;
+        }
         return -1;
     }
 };
