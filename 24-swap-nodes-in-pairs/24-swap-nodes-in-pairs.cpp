@@ -15,21 +15,13 @@ public:
         if(head == nullptr || head -> next == nullptr)
             return head;
         
-        ListNode* temp = head;
-        ListNode* prev = new ListNode(0);
-        head = head -> next;
+        ListNode* ans = head -> next;
+        ListNode* temp = head -> next -> next;
+        head -> next -> next = head;
         
-        while(temp != nullptr && temp -> next != nullptr) {
-            
-            ListNode* t = temp -> next;
-            temp -> next = temp -> next -> next;
-            t -> next = temp;
-            prev -> next = t;
-            prev = temp;
-            temp = temp -> next;
-        }
+        head -> next = swapPairs(temp);
         
-        return head;
+        return ans;
         
     }
 };
