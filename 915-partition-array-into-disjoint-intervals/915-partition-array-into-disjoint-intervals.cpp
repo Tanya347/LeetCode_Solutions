@@ -2,19 +2,19 @@ class Solution {
 public:
     int partitionDisjoint(vector<int>& arr) {
         
-        int n = arr.size();
-        vector<int> minRight(n,arr[n - 1]);
+        int leftmax = arr[0], greater = arr[0];
+        int ans = 1;
         
-        for(int i = n - 2; i >= 0; i--) {
-            minRight[i] = min(minRight[i + 1], arr[i]);
+        for(int i = 1; i < arr.size(); i++) {
+            if(arr[i] < leftmax) {
+                ans = i + 1;
+                leftmax = greater;
+            }
+            else {
+                greater = max(greater, arr[i]);
+            }
         }
         
-        int maxLeft = arr[0];
-        for(int i = 1; i < n; i++) {
-            maxLeft = max(maxLeft, arr[i - 1]);
-            if(maxLeft <= minRight[i])
-                return i;
-        }
-        return -1;
+        return ans;
     }
 };
