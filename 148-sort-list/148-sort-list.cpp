@@ -10,91 +10,80 @@
  */
 class Solution {
 public:
-    ListNode *mergeTwoSortedLinkedLists(ListNode *head1, ListNode *head2) {
-    //Write your code here
-        ListNode *Finalhead = NULL;
-        ListNode *tail = NULL;
-        ListNode *temp1 = head1;
-        ListNode *temp2 = head2;
     
-        if(temp1 == NULL && temp2 == NULL){
-            return NULL;
+    ListNode* mergeLists(ListNode* l1, ListNode* l2) {
+        
+        if(l1 == nullptr)
+            return l2;
+        
+        if(l2 == nullptr)
+            return l1;
+        
+        ListNode* head = nullptr;
+        ListNode* tail = nullptr;
+        
+        if(l1 -> val < l2 -> val) {
+            head = l1;
+            tail = l1;
+            l1 = l1 -> next;
         }
         
-        if(temp1!=NULL and temp2==NULL)
-            return temp1;
+        else {
+            head = l2;
+            tail = l2;
+            l2 = l2 -> next;
+        }
         
-        if(temp1==NULL and temp2!=NULL)
-            return temp2;
-    
-        while(temp1 != NULL and temp2 != NULL) 
-        {   
-        
-            if(Finalhead == NULL){
-                if(temp1 -> val > temp2 -> val){
-           	 	    Finalhead = temp2;
-            	    tail = temp2;
-            	    temp2 = temp2 -> next;
-        	    }
-       		    else{
-            	    Finalhead = temp1;
-            	    tail = temp1;
-            	    temp1 = temp1 -> next;
-        	    }
+        while(l1 != nullptr && l2 != nullptr) {
+            
+            if(l1 -> val < l2 -> val) {
+                tail -> next = l1;
+                tail = tail -> next;
+                l1 = l1 -> next;
             }
-            else{
-        	    if(temp1 -> val > temp2 -> val){
-            	    tail->next = temp2;
-                    tail = temp2;
-            	    temp2 = temp2 -> next;
-        	    }
-        	    else{
-            	    tail->next = temp1;
-                    tail = temp1;
-            	    temp1 = temp1 -> next;
-        	    }
+            
+            else {
+                tail -> next = l2;
+                tail = tail -> next;
+                l2 = l2 -> next;
             }
         }
-    
-        if(temp1 != NULL)
-            tail->next = temp1;
-        else
-            tail->next = temp2;
-    
-        return Finalhead;
+        
+        if(l1 != nullptr) 
+            tail -> next = l1;
+        
+        if(l2 != nullptr)
+            tail -> next = l2;
+        
+        return head;
     }
     
-    void Split(ListNode *head, ListNode **front, ListNode **back){
-    
-        ListNode *slow = head;
-        ListNode *fast = head -> next;
+    void partition(ListNode* head, ListNode** mid) {
         
-        while(fast != NULL && fast -> next != NULL){
+        ListNode* slow = head;
+        ListNode* fast = head -> next;
+        
+        while(fast != nullptr && fast -> next != nullptr) {
             slow = slow -> next;
             fast = fast -> next -> next;
         }
-    
-        *front = head;
-        *back = slow -> next;
-        slow -> next = NULL;
-    
+        
+        //splitting at the mid postion by making next of slow as null
+        *mid = slow -> next;
+        slow -> next = nullptr;
     }
     
     ListNode* sortList(ListNode* head) {
+        if(head == nullptr || head -> next == nullptr)
+            return head;
         
-        if(head == NULL || head -> next == NULL)
-        return head;
+        ListNode* mid;
         
-        ListNode *front;
-        ListNode *back;
-    
-        Split(head, &front, &back);
-    
-        ListNode *L1 = sortList(front);
-        ListNode *L2 = sortList(back);
-    
-        head = mergeTwoSortedLinkedLists(L1,L2);
-    
-        return head;
+        partition(head, &mid);
+        
+        ListNode* list1 = sortList(head);
+        ListNode* list2 = sortList(mid);
+        
+        return mergeLists(list1, list2);
     }
 };
