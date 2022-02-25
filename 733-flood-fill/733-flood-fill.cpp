@@ -1,32 +1,24 @@
 class Solution {
 public:
     
-    void helper(vector<vector<int>>& image, int row, int col, int colour, int newColor) {
+    void fill(vector<vector<int>>& image, int sr, int sc, int newColor, int color) {
         
-        if(image[row][col] == colour) {
-            
-            image[row][col] = newColor;
-            
-            if(row >= 1)
-                helper(image, row - 1, col, colour, newColor);
-            
-            if(col >= 1)
-                helper(image, row, col - 1, colour, newColor);
-            
-            if(row + 1 < image.size())
-                helper(image, row + 1, col, colour, newColor);
-            
-            if(col + 1 < image[0].size())
-                helper(image, row, col + 1, colour, newColor);
-        }
+        if(sr < 0 || sc < 0 || sr >= image.size() || sc >= image[0].size() || image[sr][sc] != color)
+            return;
+        
+        image[sr][sc] = newColor;
+        fill(image, sr - 1, sc, newColor, color);
+        fill(image, sr, sc - 1, newColor, color);
+        fill(image, sr + 1, sc, newColor, color);
+        fill(image, sr, sc + 1, newColor, color);
     }
-        
+    
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
         
-        int colour = image[sr][sc];
+        int color = image[sr][sc];
         
-        if(colour != newColor) 
-            helper(image, sr, sc, colour, newColor);
+        if(color != newColor)
+            fill(image, sr, sc, newColor, color);
         
         return image;
     }
