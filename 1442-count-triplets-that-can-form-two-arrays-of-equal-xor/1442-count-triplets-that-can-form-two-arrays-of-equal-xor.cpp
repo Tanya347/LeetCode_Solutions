@@ -4,11 +4,20 @@ public:
         
         int count = 0;
         
-        for(int i = 0; i < arr.size() - 1; i++) {
+        for(int i = 0; i < arr.size(); i++) {
             
-            for(int j = i + 1, x = arr[i]; j < arr.size(); j++) {
-                if((x ^= arr[j]) == 0)
+            for(int j = arr.size() - 1; j > i; j--) {
+                
+                int k = i;
+                int res = arr[k++];
+                
+                while(k <= j) { 
+                    res ^= arr[k++]; 
+                }
+                
+                if(res == 0) {
                     count += j - i;
+                }
             }
         }
         
