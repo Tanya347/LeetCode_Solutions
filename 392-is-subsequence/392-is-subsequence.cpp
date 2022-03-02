@@ -8,16 +8,12 @@ public:
         if(t.length() == 0)
             return false;
         
-        vector<char> subs;
-        for(int i = 0; i < s.length(); i++)
-            subs.push_back(s[i]);
-        
         int j = 0;
         for(int i = 0; i < t.length(); i++) {
-            if(j < subs.size() && t[i] == subs[j])
+            if(j < s.length() && t[i] == s[j])
                 j++;
         }
-        if(j < subs.size())
+        if(j < s.length())
             return false;
         else
             return true;
