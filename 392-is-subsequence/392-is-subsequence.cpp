@@ -5,17 +5,13 @@ public:
         if(s.length() == 0)
             return true;
         
+        
         if(t.length() == 0)
             return false;
         
-        int j = 0;
-        for(int i = 0; i < t.length(); i++) {
-            if(j < s.length() && t[i] == s[j])
-                j++;
-        }
-        if(j < s.length())
-            return false;
-        else
-            return true;
+        if(s[0] == t[0])
+            return isSubsequence(s.substr(1), t.substr(1));
+        
+        return isSubsequence(s, t.substr(1));
     }
 };
