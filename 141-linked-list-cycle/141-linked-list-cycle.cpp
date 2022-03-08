@@ -13,15 +13,16 @@ public:
         if(head == NULL)
             return false;
         
-        ListNode* slow = head;
-        ListNode* fast = head;
+        unordered_map<ListNode*, int> visited;
+        ListNode *temp = head;
         
-        while(fast != NULL && fast -> next != NULL) {
-            slow = slow -> next;
-            fast = fast -> next -> next;
-            if(slow == fast)
+        while(temp != NULL) {
+            visited[temp]++;
+            if(visited[temp] >= 2)
                 return true;
+            temp = temp -> next;
         }
+        
         return false;
     }
 };
