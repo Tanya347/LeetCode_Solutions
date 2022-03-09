@@ -35,18 +35,13 @@ public:
                 else {
                     prev -> next = temp -> next;
                 }
-                
-                ListNode* a = temp;
-                temp = temp -> next;
-                a -> next = NULL;
             }
             
             else {
-                
                 prev = temp;
-                temp = temp -> next;
             }
             
+            temp = temp -> next;
             
         }
         
