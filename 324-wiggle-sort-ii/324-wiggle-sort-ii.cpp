@@ -1,11 +1,5 @@
 class Solution {
 public:
-    void swap(vector<int> &arr, int i, int j)
-    {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
     
     void wiggleSort(vector<int>& nums) {
         
@@ -13,7 +7,9 @@ public:
         
         if(n <= 1)
             return;
+        
         vector<int> ans(n);
+        
         sort(nums.begin(), nums.end());
         int i = 1, j = n - 1;
         int flag = 0;
