@@ -4,24 +4,23 @@ public:
         
         int count = 1;
         int n = position.size();
-        vector<vector<double>> time_and_pos(n, vector<double>(2));
+        vector<vector<int>> fleet(n, vector<int>(2));
         
         for(int i = 0; i < n; i++) {
-            time_and_pos[i][0] = position[i];
-            time_and_pos[i][1] = (double)(target - position[i])/speed[i];
+            fleet[i][0] = position[i];
+            fleet[i][1] = speed[i];
         }
         
-        sort(time_and_pos.begin(), time_and_pos.end());
+        sort(fleet.begin(), fleet.end());
         
-        double slowest = time_and_pos[n - 1][1];
+        stack<double> st;
         
-        for(int i = n - 2; i >= 0; i--) {
-            if(time_and_pos[i][1] > slowest) {
-                count++;
-                slowest = time_and_pos[i][1];
-            }
+        for(int i = n - 1; i >= 0; i--) {
+            double time = (double)(target - fleet[i][0])/(double)fleet[i][1];
+            if(st.empty() || time > st.top())
+                st.push(time);
         }
         
-        return count;
+        return st.size();
     }
 };
