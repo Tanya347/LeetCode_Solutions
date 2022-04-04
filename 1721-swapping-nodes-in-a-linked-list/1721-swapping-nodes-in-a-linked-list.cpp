@@ -15,30 +15,16 @@ public:
     ListNode* swapNodes(ListNode* head, int k) {
         
         ListNode* temp = head;
-        int length = 0;
+        ListNode* node1 = head;
+        ListNode* node2 = head;
+        int count = 1;
         
         while(temp != nullptr) {
-            length++;
-            temp = temp -> next;
-        }
-        
-        if(length == 1)
-            return head;
-        
-        int m = length - k + 1, i = 1;
-        
-        temp = head;
-        ListNode* node1 = nullptr;
-        ListNode* node2 = nullptr;
-        
-        while(i <= m || i <= k) {
-            
-            if(i == k)
-                node1 = temp;
-            if(i == m)
-                node2 = temp;
-            
-            i++;
+            if(count < k)
+                node1 = node1 -> next;
+            if(count > k)
+                node2 = node2 -> next;
+            count++;
             temp = temp -> next;
         }
         
