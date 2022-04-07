@@ -18,16 +18,10 @@ public:
                 }
             }
             
-            if(i2 > i1)
-            i2--;
+            if(i2 > i1) i2--;
             
             stones.erase(stones.begin() + i1);
             stones.erase(stones.begin() + i2);
-            
-            for(int i = 0; i < stones.size(); i++)
-                cout<<stones[i]<<" ";
-            cout<<endl;
-            cout<<endl;
             
             if(max1 > max2) {
                 int diff = max1 - max2;
@@ -35,9 +29,6 @@ public:
             }
         }
         
-        if(stones.size() == 0)
-            return 0;
-        else
-            return stones[0];
+        return (stones.size() == 1)? stones[0]:0;
     }
 };
