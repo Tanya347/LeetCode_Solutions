@@ -9,34 +9,22 @@ public:
             
             //check for num1 to fill in top
             if(count1 != INT_MAX && tops[i] != num1) {
-                if(bottoms[i] == num1)
-                    count1++;
-                else 
-                    count1 = INT_MAX;
+                count1 = (bottoms[i] == num1)? (count1 + 1) : INT_MAX;  
             }
             
             //check for num1 to fill in bottom
             if(count2 != INT_MAX && bottoms[i] != num1) {
-                if(tops[i] == num1) 
-                    count2++;
-                else
-                    count2 = INT_MAX;
+                count2 = (tops[i] == num1)? (count2 + 1) : INT_MAX;  
             }
             
             //check for num2 to fill in top
             if(count3 != INT_MAX && tops[i] != num2) {
-                if(bottoms[i] == num2)
-                    count3++;
-                else
-                    count3 = INT_MAX;
+                count3 = (bottoms[i] == num2)? (count3 + 1) : INT_MAX;  
             }
             
             //check for num2 to fill in bottom
             if(count4 != INT_MAX && bottoms[i] != num2) {
-                if(tops[i] == num2)
-                    count4++;
-                else
-                    count4 = INT_MAX;
+                count4 = (tops[i] == num2)? (count4 + 1) : INT_MAX;  
             }
         }
         
