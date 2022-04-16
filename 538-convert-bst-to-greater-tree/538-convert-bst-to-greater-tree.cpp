@@ -11,15 +11,26 @@
  */
 class Solution {
 public:
-    int sum = 0;
     
     TreeNode* convertBST(TreeNode* root) {
-        if(root != nullptr) {
-            convertBST(root -> right);
-            sum += root -> val;
-            root -> val = sum;
-            convertBST(root -> left);
+        int sum = 0;
+        TreeNode* node = root;
+        stack<TreeNode*> st;
+        
+        while(!st.empty() || node != nullptr) {
+            while(node != nullptr) {
+                st.push(node);
+                node = node -> right;
+            }
+        
+            node = st.top();
+            st.pop();
+            sum += node -> val;
+            node -> val = sum;
+            node = node -> left;
+            
         }
+        
         return root;
     }
 };
